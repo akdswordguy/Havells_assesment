@@ -16,6 +16,8 @@ Open <http://127.0.0.1:8000>. Run tests:
 python -m unittest discover -s tests -v
 ```
 
+For Render, use `python app.py` as the start command. The server listens on `0.0.0.0` and reads Render's `PORT` environment variable (default `8000` for local use). Render terminates HTTPS at its proxy; the UI uses same-origin relative API paths, so browser requests remain on the deployed HTTPS origin.
+
 ## Architecture
 
 - `smart_home/core.py`: device registry, phrase interpreter, separate deterministic policy, simulator, confirmation store, and audit log.

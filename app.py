@@ -1,5 +1,6 @@
 """Local HTTP interface for the simulated smart-home assistant."""
 import json
+import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -32,6 +33,7 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self,fmt,*args): print("[%s] %s"%(self.log_date_time_string(),fmt%args))
 
 if __name__=="__main__":
-    server=ThreadingHTTPServer(("127.0.0.1",8000),Handler); print("Havells demo: http://127.0.0.1:8000")
+    port=int(os.environ.get("PORT","8000"))
+    server=ThreadingHTTPServer(("0.0.0.0",port),Handler); print(f"Havells demo listening on port {port}")
     try: server.serve_forever()
     except KeyboardInterrupt: server.server_close()
